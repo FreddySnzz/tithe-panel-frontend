@@ -13,7 +13,7 @@ export interface UpdateTitherProfilePayload {
   marriageDate?: string;
   ministry?: string;
   community?: string;
-  street?: string;
+  address?: string;
   neighborhood?: string;
   city?: string;
   state?: string;
@@ -21,8 +21,39 @@ export interface UpdateTitherProfilePayload {
 }
 
 export const titherService = {
+  getAllParishTithers(): Promise<TitherProfile[]> {
+    return api.get<TitherProfile[]>('/tither');
+  },
+
   getMyProfile(): Promise<TitherProfile> {
     return api.get<TitherProfile>('/tither/me');
+  },
+
+  createByAdmin(
+    payload: UpdateTitherProfilePayload & { password: string },
+  ): Promise<TitherProfile> {
+    return api.post<TitherProfile>('/tither', {
+      ...payload,
+      ...(payload.phone && { phone: unmaskPhone(payload.phone) }),
+      ...(payload.phoneSecondary && {
+        phoneSecondary: unmaskPhone(payload.phoneSecondary),
+      }),
+    });
+  },
+
+  updateByAdmin(
+    titherId: string,
+    payload: UpdateTitherProfilePayload,
+  ): Promise<TitherProfile> {
+    return api.patch<TitherProfile>(`/tither/${titherId}`, {
+      ...payload,
+      ...(payload.phone && { phone: unmaskPhone(payload.phone) }),
+      ...(payload.phoneSecondary !== undefined && {
+        phoneSecondary: payload.phoneSecondary
+          ? unmaskPhone(payload.phoneSecondary)
+          : undefined,
+      }),
+    });
   },
 
   updateMyProfile(payload: UpdateTitherProfilePayload): Promise<TitherProfile> {

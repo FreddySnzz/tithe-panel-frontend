@@ -61,7 +61,7 @@ export function EditTitherProfileDialog({
     marriageDate: '',
     community: '',
     ministry: '',
-    street: '',
+    address: '',
     neighborhood: '',
     city: '',
     state: '',
@@ -88,7 +88,7 @@ export function EditTitherProfileDialog({
       handleFieldChange('marriageDate', toDateInputValue(profile.marriageDate));
       handleFieldChange('community', profile.community ?? '');
       handleFieldChange('ministry', profile.ministry ?? '');
-      handleFieldChange('street', profile.street ?? '');
+      handleFieldChange('address', profile.address ?? '');
       handleFieldChange('neighborhood', profile.neighborhood ?? '');
       handleFieldChange('city', profile.city ?? '');
       handleFieldChange('state', profile.state ?? '');
@@ -108,13 +108,15 @@ export function EditTitherProfileDialog({
         phoneSecondary: formValues.phoneSecondary,
         civilStatus: formValues.civilStatus,
         spouseName: formValues.civilStatus === 'MARRIED' ? formValues.spouseName : undefined,
+        spouseBirthDate: formValues.civilStatus === 'MARRIED' ? formValues.spouseBirthDate : undefined,
         marriageDate: formValues.civilStatus === 'MARRIED' ? formValues.marriageDate : undefined,
         community: formValues.community || undefined,
         ministry: formValues.ministry || undefined,
-        street: formValues.street || undefined,
+        address: formValues.address || undefined,
         neighborhood: formValues.neighborhood || undefined,
         city: formValues.city || undefined,
         state: formValues.state || undefined,
+        zipCode: formValues.zipCode || undefined,
       });
 
       toast.success('Dados cadastrais atualizados com sucesso!');
@@ -133,7 +135,7 @@ export function EditTitherProfileDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-card border-border font-space-grotesk sm:max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="bg-card border-border sm:max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-lg uppercase tracking-tight">
             Atualizar Ficha Cadastral

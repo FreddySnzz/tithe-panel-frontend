@@ -23,8 +23,10 @@ async function request<T>(endpoint: string, options: RequestOptions = {}): Promi
   const authToken =
     token ?? (typeof window !== 'undefined' ? Cookies.get('token') : undefined);
 
+  const isFormData = typeof FormData !== 'undefined' && body instanceof FormData;
+
   const resolvedHeaders: Record<string, string> = {
-    'Content-Type': 'application/json',
+    ...(!isFormData && { 'Content-Type': 'application/json' }),
     ...(headers as Record<string, string>),
   };
 
@@ -35,7 +37,12 @@ async function request<T>(endpoint: string, options: RequestOptions = {}): Promi
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
     ...rest,
     headers: resolvedHeaders,
-    body: body !== undefined ? JSON.stringify(body) : undefined,
+    body:
+      body !== undefined
+        ? isFormData
+          ? body
+          : JSON.stringify(body)
+        : undefined,
   });
 
   if (!response.ok) {

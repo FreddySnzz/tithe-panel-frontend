@@ -36,7 +36,7 @@ export function AppSidebar({
   const navItems = user ? ROLE_NAVIGATION[user.role] : [];
 
   return (
-    <Sidebar collapsible="icon" className="border-r border-border font-space-grotesk">
+    <Sidebar collapsible="icon" className="border-r border-border">
       <SidebarHeader className="h-16 border-b border-border flex justify-center px-3">
         <div className="flex items-center gap-3 overflow-hidden">
           {parish?.logoUrl ? (
@@ -100,9 +100,10 @@ export function AppSidebar({
       </SidebarContent>
 
       <SidebarFooter className="border-t border-border p-3 group-data-[collapsible=icon]:hidden">
-        <p className="text-[11px] text-muted-foreground truncate">
-          {user?.name}
-        </p>
+        <div className="text-end text-[0.65rem] text-muted-foreground">
+          <p>“A generosidade alarga o nosso coração.”</p>
+          <p> — Papa Francisco</p>
+        </div>
       </SidebarFooter>
 
       <SidebarRail />

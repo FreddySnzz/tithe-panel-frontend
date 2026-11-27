@@ -89,7 +89,7 @@ export default async function RootLayout({
     >
       <body 
         className={cn(
-          "min-h-full flex flex-col",
+          "min-h-full flex flex-col font-space-grotesk",
           geistSans.variable, 
           geistMono.variable, 
           playfair.variable, 

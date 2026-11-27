@@ -107,7 +107,7 @@ export function TitherDashboard() {
 
   if (isLoading && !profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background font-space-grotesk">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="flex flex-col items-center gap-3 text-muted-foreground">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
           <p className="text-sm">Carregando o dashboard...</p>
@@ -125,7 +125,6 @@ export function TitherDashboard() {
               label="Total Devolvido"
               value={formatCentsToBRL(calendarData?.totalReturned ?? 0)}
               description={`Contribuições confirmadas em ${selectedYear}`}
-              icon={HandCoins}
             />
 
             <StatCard
@@ -143,7 +142,6 @@ export function TitherDashboard() {
                   ? `${awaitingCount} devolução(ões) aguardando confirmação`
                   : `${12 - paidMonthsCount} mês(es) pendente(s)`
               }
-              icon={CalendarCheck2}
             />
 
             <StatCard
@@ -161,7 +159,7 @@ export function TitherDashboard() {
           </section>
 
           <section className="space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex flex-row sm:items-center justify-between gap-3 ">
               <div>
                 <h1 className="text-lg font-bold uppercase tracking-tight">
                   Minhas Devoluções
@@ -176,10 +174,10 @@ export function TitherDashboard() {
                   value={String(selectedYear)}
                   onValueChange={(val) => setSelectedYear(Number(val))}
                 >
-                  <SelectTrigger className="w-full cursor-pointer text-foreground border border-border bg-card font-space-grotesk">
+                  <SelectTrigger className="w-full cursor-pointer text-foreground border border-border bg-card">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="font-space-grotesk bg-card text-foreground border-border">
+                  <SelectContent className="bg-card text-foreground border-border">
                     <SelectGroup>
                       {yearOptions.map((yr) => (
                         <SelectItem
@@ -196,7 +194,7 @@ export function TitherDashboard() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
               {calendarData?.calendar.map((item: CalendarMonthItem) => {
                 const isPaid = item.status === 'PAID';
                 const isAwaitingApproval =
@@ -283,7 +281,6 @@ export function TitherDashboard() {
         <section className="rounded-xl border border-border bg-card p-6 space-y-5">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border pb-4">
             <div className="flex items-center gap-2.5">
-              <UserCheck className="h-5 w-5 text-primary" />
               <div>
                 <h2 className="text-base font-bold uppercase tracking-tight">
                   Minha Ficha Cadastral
@@ -319,6 +316,13 @@ export function TitherDashboard() {
             </div>
 
             <div>
+              <p className="text-xs text-muted-foreground">Telefone Secundário</p>
+              <p className="font-medium mt-0.5">
+                {formatPhoneMask(profile.phoneSecondary || '—')}
+              </p>
+            </div>
+
+            <div>
               <p className="text-xs text-muted-foreground">Data de Nascimento</p>
               <p className="font-medium mt-0.5">
                 {formatDateOnlyBR(profile.birthDate)}
@@ -349,6 +353,15 @@ export function TitherDashboard() {
                     {formatDateOnlyBR(profile.marriageDate)}
                   </p>
                 </div>
+
+                <div>
+                  <p className="text-xs text-muted-foreground">
+                    Data de Nasc. Cônjuge
+                  </p>
+                  <p className="font-medium mt-0.5">
+                    {formatDateOnlyBR(profile.spouseBirthDate || '—')}
+                  </p>
+                </div>
               </>
             )}
 
@@ -372,8 +385,9 @@ export function TitherDashboard() {
                 <p className="text-xs text-muted-foreground">Endereço</p>
                 <p className="font-medium mt-0.5">
                   {[
-                    profile.street,
+                    profile.address,
                     profile.neighborhood,
+                    profile.zipCode,
                     profile.city && profile.state
                       ? `${profile.city} - ${profile.state}`
                       : profile.city || profile.state,

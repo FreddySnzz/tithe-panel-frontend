@@ -102,12 +102,12 @@ export function CheckoutReturnDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-card border-border font-space-grotesk sm:max-w-md rounded-lg">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 text-lg uppercase tracking-tight">
+      <DialogContent className="bg-card border-border sm:max-w-md rounded-lg">
+        <DialogHeader className="gap-1">
+          <DialogTitle className="flex items-center gap-2 text-md md:text-lg uppercase tracking-tight">
             Faça sua Devolução do Dízimo
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="text-xs md:text-md">
             Referência:{' '}
             <span className="font-semibold text-foreground">
               {monthLabel} de {year}
@@ -152,12 +152,12 @@ export function CheckoutReturnDialog({
                 id="payment-method"
                 className={cn(
                   'w-full cursor-pointer text-muted-foreground border-none transition-all',
-                  'bg-background hover:bg-black/20 font-space-grotesk',
+                  'bg-background hover:bg-black/20',
                 )}
               >
                 <SelectValue placeholder="Selecione a forma..." />
               </SelectTrigger>
-              <SelectContent className="font-space-grotesk bg-background text-muted-foreground border border-muted-foreground/20">
+              <SelectContent className="bg-background text-muted-foreground border border-muted-foreground/20">
                 <SelectGroup>
                   {PAYMENT_METHOD_OPTIONS.map((opt) => (
                     <SelectItem

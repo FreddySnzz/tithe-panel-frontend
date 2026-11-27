@@ -44,7 +44,7 @@ export default function RegisterPage() {
     marriageDate: '',
     community: '',
     ministry: '',
-    street: '',
+    address: '',
     neighborhood: '',
     city: '',
     state: '',
@@ -87,7 +87,7 @@ export default function RegisterPage() {
         marriageDate: formValues.civilStatus === 'MARRIED' && formValues.marriageDate ? formValues.marriageDate : undefined,
         ministry: formValues.ministry || undefined,
         community: formValues.community || undefined,
-        street: formValues.street || undefined,
+        address: formValues.address || undefined,
         neighborhood: formValues.neighborhood || undefined,
         city: formValues.city || undefined,
         state: formValues.state || undefined,
@@ -112,7 +112,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-background px-4 py-10 font-space-grotesk">
+    <main className="min-h-screen flex items-center justify-center bg-background px-4 py-10">
       <div className="w-full max-w-2xl rounded-xl border border-border bg-card p-6 sm:p-8 shadow-lg">
         <div className="flex flex-col items-center text-center mb-8">
           <div className="flex items-center justify-center mb-4">
@@ -145,12 +145,12 @@ export default function RegisterPage() {
                   aria-label="Selecione uma paróquia..."
                   className={cn("border border-muted-foreground/20 w-full cursor-pointer",
                     "text-muted-foreground border-none transition-all",
-                    "bg-background hover:bg-black/20 font-space-grotesk",
+                    "bg-background hover:bg-black/20",
                   )}
                 >
                   <SelectValue placeholder="Selecione uma paróquia..." className="text-sm font-semibold" />
                 </SelectTrigger>
-                <SelectContent className="transition-all font-space-grotesk bg-background 
+                <SelectContent className="transition-all bg-background 
                   text-muted-foreground border border-muted-foreground/20"
                 >
                   <SelectGroup>

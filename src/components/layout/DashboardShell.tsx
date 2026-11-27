@@ -22,7 +22,7 @@ export function DashboardShell({
 }: DashboardShellProps) {
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-background text-foreground font-space-grotesk">
+      <div className="min-h-screen flex w-full bg-background text-foreground">
         <AppSidebar
           activeTab={activeTab}
           onSelectTab={onSelectTab}

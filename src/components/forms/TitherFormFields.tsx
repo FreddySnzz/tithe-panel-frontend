@@ -32,7 +32,7 @@ export interface TitherFormValues {
   marriageDate: string;
   community: string;
   ministry: string;
-  street: string;
+  address: string;
   neighborhood: string;
   city: string;
   state: string;
@@ -72,7 +72,7 @@ export function TitherFormFields({
             <Input
               id="tither-name"
               type="text"
-              placeholder="Ex: Maria de Fátima Silva"
+              placeholder="Ex: Maria de Fátima dos Santos"
               value={values.name}
               onChange={(e) => onChange('name', e.target.value)}
               disabled={disabled}
@@ -151,11 +151,11 @@ export function TitherFormFields({
             >
               <SelectTrigger
                 id="tither-civilStatus"
-                className="w-full cursor-pointer text-muted-foreground border-none bg-background hover:bg-black/20 font-space-grotesk"
+                className="w-full cursor-pointer text-muted-foreground border-none bg-background hover:bg-black/20"
               >
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="font-space-grotesk bg-background text-muted-foreground border border-muted-foreground/20">
+              <SelectContent className="bg-background text-muted-foreground border border-muted-foreground/20">
                 <SelectGroup>
                   {CIVIL_STATUS_OPTIONS.map((opt) => (
                     <SelectItem
@@ -172,7 +172,10 @@ export function TitherFormFields({
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="tither-community">Comunidade / Capela</Label>
+            <Label htmlFor="tither-community">
+              Comunidade / Capela
+              <span className="block sm:hidden text-xs text-muted-foreground/50">(opcional)</span>
+            </Label>
             <Input
               id="tither-community"
               type="text"
@@ -185,7 +188,10 @@ export function TitherFormFields({
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="tither-ministry">Pastoral / Movimento</Label>
+            <Label htmlFor="tither-ministry">
+              Pastoral / Movimento
+              <span className="block sm:hidden text-xs text-muted-foreground/50">(opcional)</span>
+            </Label>
             <Input
               id="tither-ministry"
               type="text"
@@ -250,13 +256,13 @@ export function TitherFormFields({
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="sm:col-span-2 space-y-1.5">
-            <Label htmlFor="tither-street">Endereço (Rua / Número)</Label>
+            <Label htmlFor="tither-address">Endereço (Rua / Número)</Label>
             <Input
-              id="tither-street"
+              id="tither-address"
               type="text"
               placeholder="Ex: Av. Marechal Castelo Branco, S/N"
-              value={values.street}
-              onChange={(e) => onChange('street', e.target.value)}
+              value={values.address}
+              onChange={(e) => onChange('address', e.target.value)}
               disabled={disabled}
               className={inputClass}
             />
@@ -305,11 +311,13 @@ export function TitherFormFields({
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="tither-zipcode">CEP</Label>
+            <Label htmlFor="tither-zipcode">
+              CEP
+              <span className="block sm:hidden text-xs text-muted-foreground/50">(opcional)</span>
+            </Label>
             <Input
               id="tither-zipcode"
               type="number"
-              maxLength={8}
               placeholder="Ex: 64000-000"
               value={values.zipCode}
               onChange={(e) => onChange('zipCode', e.target.value)}

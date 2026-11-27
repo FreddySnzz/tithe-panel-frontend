@@ -45,3 +45,21 @@ export interface ParishMonthlyReportResponse {
   totalCollected: number;
   report: ParishMonthlyReportItem[];
 }
+
+export interface PendingReturnItem {
+  id: string;
+  referenceMonth: number;
+  referenceYear: number;
+  value: number;
+  paymentMethod: PaymentMethod;
+  status: ReturnStatus;
+  createdAt: string;
+  user: {
+    id: string;
+    name: string;
+    phone: string;
+    tither?: {
+      community: string | null;
+    } | null;
+  };
+}

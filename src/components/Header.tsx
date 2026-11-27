@@ -20,8 +20,8 @@ export default function Header({ title }: HeaderProps) {
     <header className="border-b border-border bg-card/80 backdrop-blur-sm sticky top-0 z-20">
       <div className="px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 min-w-0">
-          <SidebarTrigger className="cursor-pointer text-muted-foreground hover:text-foreground" />
-          <Separator orientation="vertical" className="h-5" />
+          <SidebarTrigger className="cursor-pointer text-muted-foreground" />
+          <Separator orientation="vertical" />
 
           {parish?.logoUrl ? (
             <img
@@ -41,7 +41,7 @@ export default function Header({ title }: HeaderProps) {
             </p>
             {parish?.priest && (
               <p className="text-xs text-muted-foreground truncate hidden sm:block">
-                Pároco: {parish.priest}
+                Responsável: {parish.priest}
               </p>
             )}
           </div>

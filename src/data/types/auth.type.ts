@@ -18,7 +18,7 @@ export interface RegisterPayload {
   marriageDate?: string;
   ministry?: string;
   community?: string;
-  street?: string;
+  address?: string;
   neighborhood?: string;
   city?: string;
   state?: string;
