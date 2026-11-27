@@ -54,7 +54,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md rounded-xl border border-border bg-card p-8 shadow-lg">
         <div className="flex flex-col items-center text-center mb-6">
           <div className="flex items-center justify-center mb-4">
-            <ShatteredHeartIcon size="3rem" className="text-muted-foreground/50" />
+            <ShatteredHeartIcon size="3rem" className="text-muted-foreground" />
           </div>
 
           <h1 className="text-xl font-bold tracking-tight uppercase">

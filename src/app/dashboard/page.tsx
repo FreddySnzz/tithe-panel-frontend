@@ -1,26 +1,40 @@
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import Header from "@/components/Header";
-import DashboardLayout from "@/components/DashboardLayout";
+'use client';
 
-export default async function DashboardPage() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get('token')?.value;
+import { Loader2 } from 'lucide-react';
+import { useAuth } from '@/data/contexts/AuthContext';
+import { TitherDashboard } from '@/components/dashboard/tither/TitherDashboard';
 
-  if (!token) {
-    redirect('/login'); 
+export default function DashboardPage() {
+  const { user } = useAuth();
+
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background font-space-grotesk">
+        <Loader2 className="h-7 w-7 animate-spin text-primary" />
+      </div>
+    );
   }
 
-  return (
-    <div className="flex flex-col h-dvh overflow-y-auto bg-background-alternative font-space-grotesk bg-primary text-secondary">
-      <Header />
-      <main className="flex-1 flex flex-col">
-        {/* <DashboardLayout 
-          initialTickets={tickets}
-          initialMetrics={initialMetrics}
-          accessToken={token}
-        /> */}
-      </main>
-    </div>
-  );
+  if (user.role === 'PARISH_ADMIN') {
+    // Próxima etapa: ParishAdminDashboard
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background text-foreground font-space-grotesk">
+        <p className="text-sm text-muted-foreground">
+          Painel Administrativo da Paróquia (em construção)
+        </p>
+      </div>
+    );
+  }
+
+  if (user.role === 'SUPER_ADMIN') {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background text-foreground font-space-grotesk">
+        <p className="text-sm text-muted-foreground">
+          Painel Super Admin (em construção)
+        </p>
+      </div>
+    );
+  }
+
+  return <TitherDashboard />;
 }

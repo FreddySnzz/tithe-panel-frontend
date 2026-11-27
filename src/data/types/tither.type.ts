@@ -11,12 +11,14 @@ export interface TitherProfile {
   ministry: string | null;
   civilStatus: CivilStatus;
   spouseName: string | null;
+  spouseBirthDate: string | null;
   marriageDate: string | null;
   community: string | null;
   street: string | null;
   neighborhood: string | null;
   city: string | null;
   state: string | null;
+  zipCode: string | null;
   user: {
     id: string;
     name: string;

@@ -81,3 +81,39 @@ export const formatDateByFirebase = (dateVal: any) => {
 
   return localDate.toISOString().slice(0, 16);
 };
+
+export const MONTH_NAMES_PT: Record<number, string> = {
+  1: 'Janeiro',
+  2: 'Fevereiro',
+  3: 'Março',
+  4: 'Abril',
+  5: 'Maio',
+  6: 'Junho',
+  7: 'Julho',
+  8: 'Agosto',
+  9: 'Setembro',
+  10: 'Outubro',
+  11: 'Novembro',
+  12: 'Dezembro',
+};
+
+export function formatDateOnlyBR(isoString: string | null | undefined): string {
+  if (!isoString) return '—';
+  const [year, month, day] = isoString.slice(0, 10).split('-');
+  if (!year || !month || !day) return '—';
+  return `${day}/${month}/${year}`;
+}
+
+export function toDateInputValue(isoString: string | null | undefined): string {
+  if (!isoString) return '';
+  return isoString.slice(0, 10);
+}
+
+export function formatDateTimeBR(isoString: string | null | undefined): string {
+  if (!isoString) return '—';
+  return new Intl.DateTimeFormat('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  }).format(new Date(isoString));
+}
